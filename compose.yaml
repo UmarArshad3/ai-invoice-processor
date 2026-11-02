@@ -1,4 +1,24 @@
 services:
+  web:
+    build: .
+    container_name: invoice-api
+    restart: unless-stopped
+    ports:
+      - "8001:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg://invoice_user:local_dev_password@db:5432/invoice_db
+      BEDROCK_MODEL_ID: ${BEDROCK_MODEL_ID}
+      AWS_REGION: ${AWS_REGION}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
+    volumes:
+      - ./uploads:/app/uploads
+      - ${HOME}/.aws:/root/.aws:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
   db:
     image: postgres:17
     container_name: invoice-postgres

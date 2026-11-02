@@ -209,18 +209,88 @@ The tests cover invoice validation and API behavior, including file validation, 
 
 The API tests use an isolated in-memory SQLite database and mocked external services, so they do not modify your local PostgreSQL invoice records or invoke Amazon Bedrock.
 
-## Docker
+## Docker Compose
 
-Build the application image:
+The application and PostgreSQL database can run together using Docker Compose.
+
+### Services
+
+| Service | Description | Host port |
+|---|---|---|
+| `web` | FastAPI application | 8001 |
+| `db` | PostgreSQL database | 5433 |
+
+The application connects to PostgreSQL through the internal Docker Compose hostname `db` on port `5432`.
+
+### Configure environment variables
+
+Create `.env` from the example:
 
 ```bash
-docker build -t ai-invoice-processor .
+cp .env.example .env
 ```
 
-The Dockerfile packages the FastAPI application and its dependencies.
+Configure your Amazon Bedrock model ID, AWS region, and database settings as required.
 
-PostgreSQL is currently managed separately through Docker Compose. The application image has been built successfully; full application-container orchestration is a future enhancement.
+Make sure AWS credentials are available to the container through your configured AWS credentials directory or environment.
 
+### Start the services
+
+```bash
+docker compose up -d --build
+```
+
+Check service status:
+
+```bash
+docker compose ps
+```
+
+View application logs:
+
+```bash
+docker compose logs -f web
+```
+
+### Verify the application
+
+Health endpoint:
+
+```bash
+curl http://localhost:8001/health
+```
+
+Interactive API documentation:
+
+http://localhost:8001/docs
+
+### Database migrations
+
+Check the current migration:
+
+```bash
+docker compose exec web alembic current
+```
+
+Apply pending migrations:
+
+```bash
+docker compose exec web alembic upgrade head
+```
+
+Check model and database schema consistency:
+
+```bash
+docker compose exec web alembic check
+```
+
+### Stop the services
+
+```bash
+docker compose down
+```
+
+The PostgreSQL data is stored in a named Docker volume and is preserved when the services are stopped. Avoid `docker compose down -v` unless you intentionally want to delete that volume.
 ## Database migrations
 
 Create a new migration after changing database models:
