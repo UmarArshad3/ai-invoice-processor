@@ -36,7 +36,7 @@ This project demonstrates practical AI integration, backend API development, dat
 | Database migrations | Alembic |
 | Testing | pytest, HTTPX |
 | Containerization | Docker, Docker Compose |
-| Cloud infrastructure | AWS, Terraform (planned) |
+| Cloud infrastructure | AWS, Terraform (configuration validated locally) |
 
 ## Processing workflow
 
@@ -353,14 +353,14 @@ alembic check
 - PDF files are stored locally rather than in Amazon S3.
 - Human review is required before an invoice is approved.
 - Accounting platform integrations are not implemented.
-- AWS deployment, Terraform infrastructure, CI/CD, and CloudWatch monitoring are planned enhancements.
+- Terraform infrastructure configuration is implemented and validated locally, but AWS resources have not been deployed.
+- CI/CD and CloudWatch monitoring are planned enhancements.
 
 ## Future improvements
 
 - OCR support for scanned invoices.
 - Amazon S3 storage for uploaded documents.
-- AWS deployment using Terraform.
-- Docker Compose orchestration for the application and database.
+- AWS deployment using Terraform when the budget permits.
 - GitHub Actions continuous integration.
 - CloudWatch logging and monitoring.
 - Email-based invoice ingestion.
@@ -381,5 +381,7 @@ Completed:
 - Alembic database migrations.
 - Automated test suite.
 - Successful Docker image build.
+
+- Terraform infrastructure configuration, formatting, and validation.
 
 Further cloud deployment and integration enhancements are planned.
