@@ -1,0 +1,7 @@
+aws_region                   = "eu-north-1"
+project_name                 = "ai-invoice-processor"
+environment                  = "portfolio"
+instance_type                = "t4g.micro"
+allowed_ssh_cidr              = "203.0.113.10/32"
+allowed_app_cidr              = "203.0.113.10/32"
+bedrock_inference_profile_arn = "arn:aws:bedrock:eu-north-1:123456789012:inference-profile/eu.amazon.nova-micro-v1:0"
