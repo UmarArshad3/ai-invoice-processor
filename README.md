@@ -291,6 +291,30 @@ docker compose down
 ```
 
 The PostgreSQL data is stored in a named Docker volume and is preserved when the services are stopped. Avoid `docker compose down -v` unless you intentionally want to delete that volume.
+### End-to-End Verification
+
+The Dockerized application was tested successfully through the complete invoice processing workflow.
+
+**Test environment:**
+- FastAPI application running in Docker.
+- PostgreSQL 17 running in Docker.
+- Amazon Bedrock accessed from inside the application container.
+- A generated PDF invoice with a unique invoice number.
+
+**Verified workflow:**
+1. Uploaded a PDF invoice through the FastAPI endpoint.
+2. Extracted invoice text from the PDF.
+3. Processed invoice data using Amazon Bedrock.
+4. Validated the extracted fields and invoice totals.
+5. Checked for duplicate invoices.
+6. Stored the invoice in PostgreSQL.
+7. Retrieved the saved invoice through the API.
+8. Approved the invoice through the human review endpoint.
+9. Verified that the approved status persisted in PostgreSQL.
+
+**Test result:** Successful. The test invoice was processed, validated, stored, retrieved, and approved.
+
+The local test PDF is excluded from Git. Its generator script is included in `test-data/create_test_invoice.py` so the test document can be reproduced.
 ## Database migrations
 
 Create a new migration after changing database models:

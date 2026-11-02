@@ -6,3 +6,6 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 uploads/
+
+# Generated test invoices
+test-data/*.pdf
