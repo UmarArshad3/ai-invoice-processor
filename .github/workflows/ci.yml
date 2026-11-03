@@ -62,6 +62,14 @@ jobs:
       - name: Check Terraform formatting
         run: terraform fmt -check -recursive
 
+      - name: Inspect Terraform provider files
+        run: |
+          terraform version
+          echo "Lock file:"
+          cat .terraform.lock.hcl
+          echo "Provider cache:"
+          find .terraform/providers -maxdepth 5 -type f
+
       - name: Initialize Terraform
         run: terraform init -backend=false -input=false -lockfile=readonly
 
