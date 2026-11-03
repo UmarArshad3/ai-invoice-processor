@@ -6,6 +6,8 @@ This project demonstrates practical AI integration, backend API development, dat
 
 ## Screenshots
 
+![AI Invoice Processor architecture diagram](docs/screenshots/ai-invoice-processor-architecture.png)
+
 ### API documentation
 ![API documentation](docs/screenshots/api-documentation.png)
 
