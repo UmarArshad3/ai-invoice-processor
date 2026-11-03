@@ -209,6 +209,30 @@ The tests cover invoice validation and API behavior, including file validation, 
 
 The API tests use an isolated in-memory SQLite database and mocked external services, so they do not modify your local PostgreSQL invoice records or invoke Amazon Bedrock.
 
+## Continuous Integration (GitHub Actions)
+
+GitHub Actions automatically runs the project's CI pipeline on every push and pull request targeting the `main` branch.
+
+### Automated checks
+
+The pipeline includes two jobs:
+
+**Python Tests**
+- Sets up Python 3.12.
+- Installs project dependencies.
+- Runs the automated test suite using `pytest -v`.
+- Uses an isolated SQLite database and placeholder Bedrock configuration, so CI does not require AWS credentials or invoke Amazon Bedrock.
+
+**Terraform Validation**
+- Sets up Terraform 1.16.4.
+- Checks Terraform formatting using `terraform fmt -check -recursive`.
+- Initializes Terraform using the committed provider lock file.
+- Validates the Terraform configuration using `terraform validate`.
+
+The pipeline validates infrastructure configuration only. It does not run `terraform plan` or `terraform apply`, provision AWS resources, or incur AWS infrastructure deployment costs.
+
+Both jobs must pass for the CI workflow to complete successfully.
+
 ## Docker Compose
 
 The application and PostgreSQL database can run together using Docker Compose.
