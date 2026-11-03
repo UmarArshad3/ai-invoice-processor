@@ -4,6 +4,26 @@ An AI-powered invoice processing application that extracts structured informatio
 
 This project demonstrates practical AI integration, backend API development, database design, automated testing, containerization, and cloud-ready architecture.
 
+## Screenshots
+
+### API documentation
+![API documentation](docs/screenshots/api-documentation.png)
+
+### Invoice list
+![Invoice list](docs/screenshots/invoice-list.png)
+
+### Invoice details
+![Invoice list with details](docs/screenshots/invoice-list-details.png)
+
+### Duplicate detection
+![Duplicate detection](docs/screenshots/duplicate-detection.png)
+
+### Human review workflow
+![Human review workflow](docs/screenshots/human-review-workflow.png)
+
+### CI pipeline passing
+![GitHub Actions passing](docs/screenshots/github-actions-passing.png)
+
 ## Features
 
 - Upload PDF invoices through a FastAPI endpoint.
